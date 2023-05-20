@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Deadlock Detection </title>
+	<script type="text/javascript" src="deadlock.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="./bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+	body{
+    	font-family: 'Times New Roman', Times, serif;
+	}
+	ul{
+    	list-style-type: none;
+	}
+	a{
+    	font-size: 1.2em;
+	}
+	</style>
+  </head>
+  <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+		<a class="navbar-brand" href="../index.html" style="color:white;">OS Simulator</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active" style="color:white;">
+					<a class="nav-link" style="color:white;" href="index.html">Deadlocks-Home</a>
+				</li>
+				<li class="nav-item active" style="color:white;">
+					<a class="nav-link" style="color:white;" href="wiki.html">Wiki</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+<br>
+
+<div class="jumbotron">
+	<div class="displat-3" >
+		<h1>Single-Instance Resource Deadlock Detection</h1>
+	</div>
+	<hr class="my-2">
+	<br/>
+</div>
+
+<div style = "width: 100%;;margin-left:10px;text-align:left;">
+
+	<div class="input-group input-group-lg" style="width: 350px; margin-left: 10px;">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-lg">Number of Resources</span>
+		</div>
+		<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id = "totalres">
+	</div>
+	<br>
+	<div class="input-group input-group-lg" style="width: 350px; margin-left: 10px;">
+		<div class="input-group-prepend">
+			<span class="input-group-text" id="inputGroup-sizing-lg">Number of Processes</span>
+		</div>
+    	<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id = "totalpros" onkeyup="addInitials()"></input>
+	</div>
+	<br>
+	<button class="btn btn-primary btn-success" style ="float:left;margin-left:10px;" onclick="clear_data()"  >Clear Data</button>
+</div>
+
+
+	<br>
+	<br>
+	<br>
+	<div id = "allocated" style="margin-left:10px;"></div>
+	<br><br/>
+	<br><br/>
+	<div id = "need" style="margin-left:10px;"></div>
+	<br><br/>
+	<br><br/>
+
+
+	<div  style="text-align:center;">
+	            <button class="btn btn-primary" onclick="detection()" >Run</button>
+	</div>
+	<div id = "output">
+
+	</div>
+	<br>
+	<br/>
+	<div id = "output1">
+
+	</div>
+
+
+  </body>
+</html>
