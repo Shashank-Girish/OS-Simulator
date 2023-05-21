@@ -1,0 +1,47 @@
+body {
+  text-align: center;
+  background-image: url("pxfuel.jpg");
+}
+
+h1 {
+  color: rgb(14, 141, 205);
+}
+
+.buffer {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+
+.buffer h2 {
+  margin-bottom: 10px;
+}
+
+.buffer ul,
+#result-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.buffer li,
+#result-items li {
+  margin-bottom: 5px;
+}
+
+#result-box {
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Rounded corners */
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#result-box h2 {
+  margin-bottom: 10px;
+  color: #333; /* Change header color */
+  font-size: 20px; /* Adjust font size */
+  text-decoration: underline; /* Add underline */
+}
