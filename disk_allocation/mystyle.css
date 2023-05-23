@@ -318,9 +318,10 @@ background-color: white;
   float: left;
   padding: 2%;
   width: 80%;
-  background-color:#4b65964b;
+  background-color:#2E424D;
+  color: white;
   border-radius: 0;
-  box-shadow: 2px 2px 2px 2px  rgb(100, 103, 139);
+  box-shadow: 2px 2px 2px 2px  rgb(87, 89, 120);
 
   
   
@@ -360,11 +361,11 @@ label {
 button {
   display: inline;
   margin: 70px;
-  color: rgb(12, 12, 39);
+  color: #98DAD9;
 }
 
 #plot-button {
-  background-color:   #3f507c;
+  background-color:  #98DAD9;
   margin-left: 30%;
   font-size: 17px;
   color: white;
@@ -372,14 +373,14 @@ button {
 }
 
 #animate-button {
-  background-color:  #3f507c;
+  background-color:  #98DAD9;
   font-size: 17px;
   margin-left: 5%;
   color: white;
 }
 
 #cmpr-button{
-  background-color:  #3f507c;
+  background-color:  #98DAD9;
   font-size: 17px;
   margin-left: 5%;
   color: white;
