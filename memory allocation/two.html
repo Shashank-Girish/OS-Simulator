@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width , initial-scale=1.0">
+        <meta http-equiv="X-AU-compatible" content="IE-edge">
+        <link rel="stylesheet" href="./bootstrap-4.0.0-dist/css/bootstrap.css">
+        <link rel="stylesheet" href="./one.css">
+        <script src="./jquery-3.4.1.js"></script>
+        <title>Tutorial two</title>
+      </head>
+<body>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2>Partition Calculation</h2>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-8">
+                <form id="addForm" class=" form-inline mb-3">
+                    <input type="number"   id="mytxt" class="form-control" >
+                    <input type="submit" id="mybtn" class="btn btn-dark ml-2">
+                </form>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control"  id="select_id">
+                    <option value="Entering Job Size">Entering Job Size</option>
+                    <option value="Entering Memory Size">Entering Memory Size</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table  id="mytable" class="table table-striped">
+                    <tbody id="myBody">
+                        <tr></th><td>Job No.</td><td>Job Size</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table  id="mytable" class="table table-striped">
+                    <tbody id="myBodyTwo">
+                        <tr></th><td>Block</td><td> Size</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <select id="selectedmethod" class="form-control">
+                <option value="best-fit">Best-fit</option>
+                <option value="first-fit">first-fit</option>
+                <option value="worst-fit">worst-fit</option>
+            </select>
+        </div>
+        <button id="btnCalculate" class="btn btn-success btn-block mt-5">Calulate</button>
+        <div class="row mt-5" >
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table  id="mytable" class="table table-hover">
+                     <tbody id="mainTable">
+                        <tr></th><td>Jobs</td><td>Allocated Block</td><td>Inernal Fragmentation</td><td>Comments</td></tr>
+                     </tbody>
+                </table>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+<script src="./one.js"></script>
+</body>
+</html>
