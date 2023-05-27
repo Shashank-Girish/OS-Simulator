@@ -64,6 +64,17 @@ margin-top: 300px;
 padding: 34px;
 }
 
+.but5{
+    position:absolute;
+    margin-top: 450px;
+    padding: 34px;
+    }
+
+    .but6{
+        position:absolute;
+        padding: 34px;
+        }
+
 .click:hover, .click{
     text-decoration: none;
     color: black;

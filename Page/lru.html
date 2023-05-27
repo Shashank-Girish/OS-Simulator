@@ -10,12 +10,13 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
-		<div class="navbar-header">
+	   <div class="navbar-header">
 			<a class="navbar-brand" href="#">OS simulator</a>
-		</div>
+		 </div>
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="index.html">Home</a></li>
-		</ul>
+		   <li class="active"><a href="#">Wiki</a></li>
+		 </ul>
 	</div>
 </nav>
 <br><br><br>
@@ -183,25 +184,7 @@ var index;
 		  $table.appendTo($("#div1"));
 		  $("#sp1").html('<p style="text-align:center; font-size: 32px;">'+"<b>The no of page faults :</b>"+"   "+'<span style="color:red">'+pf+'</span>'+'</p>')
 		  $("#sp2").html('<p style="text-align:center; font-size: 32px;">'+"<b>The no of page hits :</b>"+"   "+'<span style="color:green">'+ph+'</span>'+'</p>')
-		  function getRandomColor() {
-			m=m+1;
-			var color ='';
-			  if(m==1){
-				  color='Green';
-			  }
-			  if(m==2){
-				  color='Orange';
-			  }
-			  if(m==3){
-				  color='Yellow';
-			  }
-			  if(m==4){
-				  color='LightGray';
-			  }
-			
-			return color;
-			 }
-			 console.log(m);
+		console.log(m);
 txt = txt + "\n";
 console.log(txt);
 $('input[type="button"]').attr('disabled','disabled');

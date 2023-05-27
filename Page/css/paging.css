@@ -1,0 +1,70 @@
+          main {
+              display: flex;
+              align-items: center;
+              margin-left: 1rem;
+          }
+
+          body { 
+            background-color: rgb(43, 43, 82);
+            color: white;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+        }
+        h1 {
+            text-align: center;
+            font-size: 4.5rem;
+        }
+        
+  
+        .image-container img {
+              width: 250px;
+          }
+
+          .error{
+              color: red;
+              font-size: small;
+              visibility: hidden;
+              margin-left: 400px;
+          }
+
+          td, th{
+              border: 1px solid black;
+          }
+  
+          #inputs{
+              text-align: center;
+              margin-top: 50px;
+          }
+
+          .row {
+            padding: 5px;
+            width: 400px;
+        }
+        
+        .form-control {
+            padding: 20px;
+            font-size: 2rem;
+            margin-left:375px;
+        }
+        
+         
+          input[type="button"]{
+              margin: 10px;
+          }
+
+          .btn {
+            margin-left: 480px;
+            margin-top: 20px;
+            padding: 20px;
+            font-size: 2rem;
+            background-color: rgb(148, 193, 174);
+            border: 2px black solid;
+            color: black;
+            font-weight: 600;
+            border-radius: 10px;
+            text-transform: capitalize;
+        }
+
+          #particles-js {
+          background:#0E2A47;
+          height: 20vh;
+          }
