@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sequential File Allocation</title>
+  <script>
+    class FileNode {
+      constructor(name, size) {
+        this.name = name;
+        this.size = size;
+        this.start = null;
+        this.end = null;
+        this.next = null;
+      }
+    }
+  
+    class LinkedList {
+      constructor(diskSize) {
+        this.head = null;
+        this.diskSize = diskSize;
+        this.usedSpace = 0;
+      }
+  
+      insertFile(name, size) {
+        if (this.usedSpace + size > this.diskSize) {
+          console.log(`Insufficient disk space to insert file '${name}'.`);
+          return;
+        }
+  
+        const newNode = new FileNode(name, size);
+  
+        if (!this.head) {
+          newNode.start = 0;
+          newNode.end = size - 1;
+          this.head = newNode;
+        } else {
+          let currentNode = this.head;
+          while (currentNode.next) {
+            currentNode = currentNode.next;
+          }
+          const prevEnd = currentNode.end;
+          newNode.start = prevEnd + 1;
+          newNode.end = prevEnd + size;
+          currentNode.next = newNode;
+        }
+  
+        this.usedSpace += size;
+        console.log(`Inserted file '${name}' with size ${size}.`);
+        displayFiles();
+      }
+  
+      allocateFile(name, size) {
+        if (this.usedSpace + size > this.diskSize) {
+          console.log(`Insufficient disk space to allocate file '${name}'.`);
+          return;
+        }
+  
+        let currentNode = this.head;
+        while (currentNode) {
+          if (currentNode.next === null) {
+            const newStart = currentNode.end + 1;
+            const newEnd = newStart + size - 1;
+            if (newEnd > this.diskSize - 1) {
+              console.log(`Insufficient disk space to allocate file '${name}'.`);
+              return;
+            }
+            const newNode = new FileNode(name, size);
+            newNode.start = newStart;
+            newNode.end = newEnd;
+            currentNode.next = newNode;
+            this.usedSpace += size;
+            console.log(`Allocated file '${name}' with size ${size}.`);
+            displayFiles();
+            return;
+          }
+          const gap = currentNode.next.start - currentNode.end - 1;
+          if (gap >= size) {
+            const newStart = currentNode.end + 1;
+            const newEnd = newStart + size - 1;
+            const newNode = new FileNode(name, size);
+            newNode.start = newStart;
+            newNode.end = newEnd;
+            newNode.next = currentNode.next;
+            currentNode.next = newNode;
+            this.usedSpace += size;
+            console.log(`Allocated file '${name}' with size ${size}.`);
+            displayFiles();
+            return;
+          }
+          currentNode = currentNode.next;
+        }
+  
+        console.log(`Insufficient disk space to allocate file '${name}'.`);
+      }
+  
+      displayFiles() {
+        const fileStructureDiv = document.getElementById("file-structure");
+        fileStructureDiv.innerHTML = ""; // Clear the previous file structure
+  
+        let currentNode = this.head;
+        while (currentNode) {
+          const fileDiv = document.createElement("div");
+          fileDiv.textContent = `File: ${currentNode.name}, Size: ${currentNode.size}, Range: ${currentNode.start}-${currentNode.end}`;
+          fileDiv.classList.add("file");
+  
+          fileStructureDiv.appendChild(fileDiv);
+  
+          currentNode = currentNode.next;
+        }
+      }
+    }
+  
+    const diskSize = 50; // Total disk size of 50 units
+    const fileList = new LinkedList(diskSize);
+  
+    function insertFile() {
+      const fileNameInput = document.getElementById("file-name");
+      const fileSizeInput = document.getElementById("file-size");
+  
+      const fileName = fileNameInput.value;
+      const fileSize = parseInt(fileSizeInput.value);
+  
+      fileList.insertFile(fileName, fileSize);
+  
+      fileNameInput.value = "";
+      fileSizeInput.value = "";
+    }
+  </script>
+  <style>
+    .file {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sequential File Allocation</h1>
+  
+  <form onsubmit="event.preventDefault(); insertFile();">
+    <label for="file-name">File Name:</label>
+    <input type="text" id="file-name" required>
+  
+    <label for="file-size">File Size:</label>
+    <input type="number" id="file-size" required>
+  
+    <button type="submit">Insert File</button>
+  </form>
+  
+  <h2>File Structure</h2>
+  <div id="file-structure"></div>
+  
+  <script>
+    function displayFiles() {
+      fileList.displayFiles();
+    }
+  </script>
+</body>
+</html>

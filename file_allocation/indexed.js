@@ -97,35 +97,60 @@ class LinkedList {
 
   
   displayFiles() {
-    const fileStructureDiv = document.getElementById("file-structure");
-    fileStructureDiv.innerHTML = ""; // Clear the previous file structure
-
+    const fileStructureTable = document.getElementById("file-structure");
+    fileStructureTable.innerHTML = ""; // Clear the previous file structure
+  
     let currentNode = this.head;
+  
+    // Create the table header
+    const tableHeaderRow = document.createElement("tr");
+  
+    const fileNameHeader = document.createElement("th");
+    fileNameHeader.textContent = "File Name";
+    tableHeaderRow.appendChild(fileNameHeader);
+  
+    const fileSizeHeader = document.createElement("th");
+    fileSizeHeader.textContent = "File Size";
+    tableHeaderRow.appendChild(fileSizeHeader);
+  
+    const indexBlocksHeader = document.createElement("th");
+    indexBlocksHeader.textContent = "Index Blocks";
+    tableHeaderRow.appendChild(indexBlocksHeader);
+  
+    fileStructureTable.appendChild(tableHeaderRow);
+  
+    // Create table rows for each file
     while (currentNode) {
-      const fileDiv = document.createElement("div");
-      fileDiv.textContent = `File: ${currentNode.name}, Size: ${currentNode.size}`;
-      fileDiv.classList.add("file");
-
-      const indexBlocksDiv = document.createElement("div");
-      indexBlocksDiv.textContent = "Index Blocks:";
-      indexBlocksDiv.classList.add("index-blocks");
-
+      const fileRow = document.createElement("tr");
+  
+      const fileNameCell = document.createElement("td");
+      fileNameCell.textContent = currentNode.name;
+      fileRow.appendChild(fileNameCell);
+  
+      const fileSizeCell = document.createElement("td");
+      fileSizeCell.textContent = currentNode.size;
+      fileRow.appendChild(fileSizeCell);
+  
+      const indexBlocksCell = document.createElement("td");
+  
       let indexNode = currentNode.index.head;
       while (indexNode) {
         const blockNumberDiv = document.createElement("div");
         blockNumberDiv.textContent = `Block Number: ${indexNode.blockNumber}`;
         blockNumberDiv.classList.add("block-number");
-
-        indexBlocksDiv.appendChild(blockNumberDiv);
+  
+        indexBlocksCell.appendChild(blockNumberDiv);
         indexNode = indexNode.next;
       }
-
-      fileDiv.appendChild(indexBlocksDiv);
-      fileStructureDiv.appendChild(fileDiv);
-
+  
+      fileRow.appendChild(indexBlocksCell);
+  
+      fileStructureTable.appendChild(fileRow);
+  
       currentNode = currentNode.next;
     }
-    }
+  }
+  
 }
 
 // Function to handle form submission
