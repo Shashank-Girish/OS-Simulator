@@ -67,7 +67,9 @@ class LinkedList {
 
   allocateFile(name, size) {
     if (this.usedSpace + size > this.diskSize) {
-      console.log(`Insufficient disk space to allocate file '${name}'.`);
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.textContent = `Insufficient disk space to allocate file '${name}'.`;
+      errorMessage.style.display = "block";
       return;
     }
 
@@ -110,11 +112,11 @@ class LinkedList {
     tableHeaderRow.appendChild(fileNameHeader);
   
     const fileSizeHeader = document.createElement("th");
-    fileSizeHeader.textContent = "File Size";
+    fileSizeHeader.textContent = " \tFile Size ";
     tableHeaderRow.appendChild(fileSizeHeader);
   
     const indexBlocksHeader = document.createElement("th");
-    indexBlocksHeader.textContent = "Index Blocks";
+    indexBlocksHeader.textContent = "Index Blocks ";
     tableHeaderRow.appendChild(indexBlocksHeader);
   
     fileStructureTable.appendChild(tableHeaderRow);
