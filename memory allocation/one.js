@@ -10,7 +10,7 @@ var jobBlocks = [];
 var memoryBlocks = [];
 var message;
 
-// when button submit is clicked 
+// when button submit is clicked
 getValue.addEventListener('click' , AddJobsBlock);
 btnCalculate.addEventListener('click' , Calculate);
 
@@ -27,92 +27,117 @@ function Calculate(){
       var getValue = document.getElementsByClassName(".alert-btn");
       getValue.setAttribute("display ", "none");
     }
- 
-   
+
+
 }
 
-function firstFit(){
-    var geTable =  document.getElementById('mainTable');
-    var counter =0 ;
+function firstFit() {
+    var geTable = document.getElementById('mainTable');
     var sum = 0;
-    for(var i = 0 ; i < memoryBlocks.length ; i++){
-        if(parseInt(jobBlocks[counter])  <= parseInt(memoryBlocks[i])){
-            console.log(parseInt(jobBlocks[i] + " " + i)) // to be removed
-            message = 'Calculated';    
-            var difference = parseInt(memoryBlocks[i]) - parseInt(jobBlocks[counter]);
-            sum +=difference;
-            geTable.innerHTML += '<tr> ' + '<td>' +'Job '+(i+1) + '</td>' + '<td>' + 'Block '+i+'</td>' + '<td>' +difference+ '</td>' + '<td>' +message+ '</td>' +   '</tr>'
-            counter++;
+
+    for (var i = 0; i < Math.min(jobBlocks.length, memoryBlocks.length); i++) {
+        var jobSize = parseInt(jobBlocks[i]);
+        var allocated = false;
+
+        for (var j = 0; j < memoryBlocks.length; j++) {
+            var memorySize = parseInt(memoryBlocks[j]);
+
+            if (jobSize <= memorySize) {
+                var difference = memorySize - jobSize;
+                sum += difference;
+                geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block ' + j + '</td>' + '<td>' + difference + '</td>' + '<td>Calculated</td>' + '</tr>';
+                memoryBlocks[j] = difference; // Update the memory block size
+                allocated = true;
+                break;
+            }
         }
-        else{
-            message = 'Job Size cannot fit';
-            geTable.innerHTML += '<tr> ' + '<td>' +'Job '+(i+1) + '</td>' + '<td>' + 'Block '+i+'</td>' + '<td>' +0+ '</td>' + '<td>' +message+ '</td>' +   '</tr>'
-        } 
+
+        if (!allocated) {
+            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block -' + '</td>' + '<td>' + 0 + '</td>' + '<td>Job Size cannot fit</td>' + '</tr>';
+        }
     }
-    geTable.innerHTML += '<tr> ' + '<td>' + '</td>' + '<td>' + '</td>' + '<td>' +'Total =' +sum+ '</td>' + '<td>' + '</td>' +   '</tr>'
+
+    geTable.innerHTML += '<tr> ' + '<td></td>' + '<td></td>' + '<td>Total =' + sum + '</td>' + '<td></td>' + '</tr>';
     geTable.lastChild.classList.add('last');
-} // end of fisrt fit
+}
+ // end of fisrt fit
 
 
-function bestFit(){
-    var geTable =  document.getElementById('mainTable');
-    var counter =0 ;
-    var sum = 0;
-    var goal = 0
-    var closest
+ function bestFit() {
+   var geTable = document.getElementById('mainTable');
+   var sum = 0;
 
-    for(var i = 0 ; i < memoryBlocks.length ; i++ ){
-        goal = jobBlocks[counter];
-        
-        closest = memoryBlocks.reduce(function(prev, curr) {
-            return (Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev);
-          });
-          if(closest < jobBlocks[counter]){
-            message = 'Job Size cannot fit';
-            geTable.innerHTML += '<tr> ' + '<td>' +'Job '+(i+1) + '</td>' + '<td>' + 'Block '+i+'</td>' + '<td>' +0+ '</td>' + '<td>' +message+ '</td>' +   '</tr>'
-        }
-        else{
-            message = 'calculated';
-            var fragment = closest - jobBlocks[counter];
-            geTable.innerHTML += '<tr> ' + '<td>' +'Job '+(i+1) + '</td>' + '<td>' + 'Block '+i+'</td>' + '<td>' +fragment+ '</td>' + '<td>' +message+ '</td>' +   '</tr>'
-            jobBlocks[counter] =-1000; 
-        }
-        counter++;
-    }
-    // ska lebala  esebetsa fela ka nomoro tse atometseng  ......NB  
+   for (var i = 0; i < jobBlocks.length; i++) {
+     var minFragment = Infinity;
+     var minIndex = -1;
 
-}// end of Best fit
+     for (var j = 0; j < memoryBlocks.length; j++) {
+       var fragment = memoryBlocks[j] - jobBlocks[i];
+
+       if (fragment >= 0 && fragment < minFragment) {
+         minFragment = fragment;
+         minIndex = j;
+       }
+     }
+
+     if (minIndex !== -1) {
+       var allocatedBlock = memoryBlocks[minIndex];
+       sum += minFragment;
+
+       message = 'Allocated';
+       geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block ' + minIndex + '</td>' + '<td>' + minFragment + '</td>' + '<td>' + message + '</td>' + '</tr>';
+
+       // Update the memory block by subtracting the allocated job size
+       memoryBlocks[minIndex] -= jobBlocks[i];
+     } else {
+       message = 'Job cannot fit';
+       geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'N/A' + '</td>' + '<td>' + 0 + '</td>' + '<td>' + message + '</td>' + '</tr>';
+     }
+   }
+
+   geTable.innerHTML += '<tr> ' + '<td>' + '</td>' + '<td>' + '</td>' + '<td>' + 'Total = ' + sum + '</td>' + '<td>' + '</td>' + '</tr>';
+   geTable.lastChild.classList.add('last');
+ }
 
 
-function worstFit(){
-    var geTable =  document.getElementById('mainTable');
+// end of Best fit
+
+
+function worstFit() {
+    var geTable = document.getElementById('mainTable');
     var difference;
-    var maxValue = memoryBlocks[0];
-    for (let index = 0; index < jobBlocks.length; index++) {
-        
-        for(var i = 0; i < memoryBlocks.length; i++) {
-            if(memoryBlocks[i] > maxValue) {
-            maxValue = memoryBlocks[i];
+    var maxValue;
+    var maxIndex;
+
+    for (var index = 0; index < jobBlocks.length; index++) {
+        maxValue = -1;
+        maxIndex = -1;
+
+        for (var i = 0; i < memoryBlocks.length; i++) {
+            if (memoryBlocks[i] > maxValue && memoryBlocks[i] >= jobBlocks[index]) {
+                maxValue = memoryBlocks[i];
+                maxIndex = i;
+            }
         }
-        var ie = memoryBlocks.indexOf(maxValue) ;
-         difference = maxValue - jobBlocks[index]
-         memoryBlocks[ie] = -1;
+
+        if (maxIndex !== -1) {
+            difference = maxValue - jobBlocks[index];
+            memoryBlocks[maxIndex] -= jobBlocks[index]; // Reduce the memory block size by the allocated job size
+            message = 'Job can fit';
+            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (index + 1) + '</td>' + '<td>' + 'Block ' + (maxIndex + 1) + '</td>' + '<td>' + difference + '</td>' + '<td>' + message + '</td>' + '</tr>';
+        } else {
+            difference = 0;
+            message = 'Job cannot fit';
+            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (index + 1) + '</td>' + '<td>' + 'Block N/A' + '</td>' + '<td>' + difference + '</td>' + '<td>' + message + '</td>' + '</tr>';
+        }
     }
-    if(maxValue > jobBlocks[index]){
-        message = 'Job can fit';
-        geTable.innerHTML += '<tr> ' + '<td>' +'Job '+(index) + '</td>' + '<td>' + 'Block '+index + 1 +'</td>' + '<td>' +difference+ '</td>' + '<td>' +message+ '</td>' +   '</tr>'
-    }
-    else{
-        message = 'Job cannot fit';
-        geTable.innerHTML += '<tr> ' + '<td>' +'Job '+(index) + '</td>' + '<td>' + 'Block '+index + 1 +'</td>' + '<td>' +0+ '</td>' + '<td>' +message+ '</td>' +   '</tr>'
-    }
-          
 }
 
 
-}
 
-// create the table 
+
+
+// create the table
 function AddJobsBlock(e){
     e.preventDefault();
     var geTable =  document.getElementById('myBody');
@@ -130,7 +155,7 @@ function AddJobsBlock(e){
                 console.log('option1');
                 break;
             }
-        }   
+        }
     }
 
 // check to see if the second option is selected
@@ -144,30 +169,6 @@ function AddJobsBlock(e){
                 console.log('option2');
                 break;
             }
-        } 
-    }    
+        }
+    }
 } // end of block
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
