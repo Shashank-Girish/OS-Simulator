@@ -112,7 +112,7 @@ class LinkedList {
     tableHeaderRow.appendChild(fileNameHeader);
   
     const fileSizeHeader = document.createElement("th");
-    fileSizeHeader.textContent = " \tFile Size ";
+    fileSizeHeader.textContent = "File Size ";
     tableHeaderRow.appendChild(fileSizeHeader);
   
     const indexBlocksHeader = document.createElement("th");
