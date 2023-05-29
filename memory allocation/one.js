@@ -114,25 +114,27 @@ function worstFit() {
         maxIndex = -1;
 
         for (var i = 0; i < memoryBlocks.length; i++) {
-            if (memoryBlocks[i] > maxValue) {
+            if (memoryBlocks[i] > maxValue && memoryBlocks[i] >= jobBlocks[index]) {
                 maxValue = memoryBlocks[i];
                 maxIndex = i;
             }
         }
 
-        if (maxValue >= jobBlocks[index]) {
+        if (maxIndex !== -1) {
             difference = maxValue - jobBlocks[index];
-            memoryBlocks[maxIndex] = -1;
+            memoryBlocks[maxIndex] -= jobBlocks[index]; // Reduce the memory block size by the allocated job size
             message = 'Job can fit';
             geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (index + 1) + '</td>' + '<td>' + 'Block ' + (maxIndex + 1) + '</td>' + '<td>' + difference + '</td>' + '<td>' + message + '</td>' + '</tr>';
-        } else if(difference < 0){
+        } else {
             difference = 0;
             message = 'Job cannot fit';
-            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (index + 1) + '</td>' + '<td>' + 'Block ' + (index + 1) + '</td>' + '<td>' + difference + '</td>' + '<td>' + message + '</td>' + '</tr>';
+            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (index + 1) + '</td>' + '<td>' + 'Block N/A' + '</td>' + '<td>' + difference + '</td>' + '<td>' + message + '</td>' + '</tr>';
         }
-
     }
 }
+
+
+
 
 
 // create the table
