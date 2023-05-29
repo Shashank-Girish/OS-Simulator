@@ -1,0 +1,33 @@
+
+.last{
+    background-color:#23374d;
+    color: white;
+    border-radius: 4px;
+    opacity: 0.5px;
+}
+
+body{
+    background-color: rgb(188, 223, 255);
+    font-family: 'Quicksand';
+}
+
+.jumbotron{
+    background-color: azure;
+}
+
+#btnCalculate{
+    padding: auto;
+    /* width: 40%; */
+}
+
+#btnCalculate:hover{
+    background-color: green;
+}
+
+#mainTable{
+    width: 90%;
+}
+
+#mainTable tr{
+    background-color: azure;
+}
