@@ -34,32 +34,44 @@ function Calculate(){
 function firstFit() {
     var geTable = document.getElementById('mainTable');
     var sum = 0;
+    var allocatedJobs = [];
 
-    for (var i = 0; i < Math.min(jobBlocks.length, memoryBlocks.length); i++) {
+    for (var i = 0; i < jobBlocks.length; i++) {
         var jobSize = parseInt(jobBlocks[i]);
         var allocated = false;
 
         for (var j = 0; j < memoryBlocks.length; j++) {
             var memorySize = parseInt(memoryBlocks[j]);
 
-            if (jobSize <= memorySize) {
+            if (jobSize <= memorySize && !allocatedJobs.includes(i)) {
                 var difference = memorySize - jobSize;
                 sum += difference;
-                geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block ' + j + '</td>' + '<td>' + difference + '</td>' + '<td>Calculated</td>' + '</tr>';
-                memoryBlocks[j] = difference; // Update the memory block size
+                geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block ' + j + '</td>' + '<td>' + difference + '</td>' + '<td>Allocated</td>' + '</tr>';
+                memoryBlocks[j] = difference;
+                allocatedJobs.push(i);
                 allocated = true;
                 break;
             }
         }
 
         if (!allocated) {
-            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block -' + '</td>' + '<td>' + 0 + '</td>' + '<td>Job Size cannot fit</td>' + '</tr>';
+            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block -' + '</td>' + '<td>' + 0 + '</td>' + '<td>Not Allocated</td>' + '</tr>';
+        }
+    }
+
+    for (var i = 0; i < jobBlocks.length; i++) {
+        if (!allocatedJobs.includes(i)) {
+            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block -' + '</td>' + '<td>' + 0 + '</td>' + '<td>Not Allocated</td>' + '</tr>';
         }
     }
 
     geTable.innerHTML += '<tr> ' + '<td></td>' + '<td></td>' + '<td>Total =' + sum + '</td>' + '<td></td>' + '</tr>';
     geTable.lastChild.classList.add('last');
 }
+
+
+
+
  // end of fisrt fit
 
 
