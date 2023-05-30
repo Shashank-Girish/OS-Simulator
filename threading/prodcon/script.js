@@ -27,7 +27,7 @@ class AsyncMutex {
 
 const mutex = new AsyncMutex();
 const buffer = [];
-const MAX_BUFFER_SIZE = 5;
+const MAX_BUFFER_SIZE = 2;
 let cycleCount = 0;
 
 function displayBuffer() {
