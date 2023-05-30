@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Allocation</title>
+  <link rel="stylesheet" href="indexed.css">
+  <style>
+   
+  </style>
+  <script src="sequential.js"></script>
+  <script>
+    const fileList= new LinkedList(50);
+    function displayError(message) {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.textContent = message;
+      errorMessage.style.display = "block";
+    }
+
+    function closeErrorMessage() {
+      const errorMessage = document.getElementById("error-message");
+      errorMessage.textContent = "";
+      errorMessage.style.display = "none";
+    }
+  </script>
+</head>
+<body>
+<section>
+    <h1>Sequential File Allocation</h1>
+    <div class="row">
+      <div class="column">
+        <h2>Allocate File</h2>
+        <form onsubmit="event.preventDefault(); closeErrorMessage(); allocatesFile();">
+            <label for="file-name-allocate">File Name:</label>
+            <input type="text" id="file-name-allocate" required>
+            <br>
+            <label for="file-size-allocate">File Size:</label>
+            <input type="number" id="file-size-allocate" required>
+            <br>
+            <button type="submit">Allocate File</button>
+        </form>
+        <button onclick="closeErrorMessage(); displayTable()">Display Table</button>
+
+        <h2>File Structure</h2>
+        <div id="file-structure"></div>
+        <div id="error-message" class="error"></div>
+      </div>
+      <div class="column">
+        <h2>What is Sequential File Allocation?</h2>
+        <p>Sequential file allocation is a method used for organizing files on a disk. In this allocation scheme, files are stored on the disk one after another in a sequential manner, without any gaps between them.</p>
+        <br>
+        <p>When a new file is allocated, it is placed immediately after the last file on the disk. The starting address of each file is determined by the end address of the previous file. This ensures that files are stored in a continuous block of disk space.</p>
+        <br>
+        <p>Sequential file allocation provides simplicity in terms of file retrieval, as files can be easily accessed by traversing them sequentially from the beginning. However, it can suffer from the problem of fragmentation. As files are continuously added and removed, free disk space becomes fragmented, resulting in inefficient utilization of storage capacity.</p>
+        <br>
+        <h3>Advantages of Sequential File Allocation:</h3>
+        <br>
+        <ul>
+          <li>Simple and easy to implement.</li>
+          <li>Sequential access to files is efficient.</li>
+          <li>No additional data structures are required to track file locations.</li>
+        </ul>
+        <br>
+        <h3>Disadvantages of Sequential File Allocation:</h3>
+        <br>
+        <ul>
+          <li>Fragmentation of free disk space can occur, leading to inefficient storage utilization.</li>
+          <li>Deleting or modifying files can result in wasted space.</li>
+          <li>Files cannot be easily inserted or resized without causing fragmentation.</li>
+        </ul>
+        <br>
+      </div>
+    </div>
+    <div class='air air1'></div>
+    <div class='air air2'></div>
+    <div class='air air3'></div>
+    <div class='air air4'></div>
+
+</section>
+
+
+</body>
+</html>
