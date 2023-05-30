@@ -2,16 +2,21 @@
 <html lang="en">
 
 <head>
-	<title>MRU</title>
+	<title>FIFO</title>
+	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/fifo.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Urbanist&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Playfair:wght@500&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -33,7 +38,6 @@
 <body>
     <h2>MRU</h2>    
     <hr>
-    <br>
     <br>
     <form>
         <div class="container">
@@ -145,7 +149,7 @@
 		}
 		txt = " "; var real; var m = 0;
 		var $table = $('<table border="5" style="margin-top: 20px; color: black;"></table>');
-		$table.addClass('table table-striped');
+		$table.addClass('table');
 		$tbody = $("<tbody></tbody>");
 		for (i = 0; i < row; i++) {
 			var line = $('<tr style="font-size: 32px; font-family: Playfair; text-align: center;"></tr>');
