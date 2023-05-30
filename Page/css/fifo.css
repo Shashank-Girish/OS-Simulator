@@ -1,36 +1,76 @@
 body { 
-    background-color: rgb(43, 43, 82);
-    color: white;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(219, 219, 226);
+    color: rgb(53, 49, 49);
+    font-family:'Fjalla One';
 }
 h1 {
     text-align: center;
-    font-size: 4.5rem;
+    font-size: 7rem;
 }
 
 h2 {
     text-align: center;
-    font-size: 4rem;
+    font-size: 6rem;
 }
 
+label {
+    color: rgb(53, 49, 49);
+    font-family: Urbanist;
+    font-weight: 600;
+    font-size: 50px;
+    margin-bottom: 5px;
+    display: inline;
+  }
+
+  td, th {
+    border: 1px solid black;
+  }
+  
+
 .row {
+
     padding: 5px;
     width: 400px;
 }
 
+.one .two { 
+    display: inline-block;
+    margin: 400px;
+}
+
+div .form-control .row .two {
+    margin-left: 400px;
+}
+
+div .form-control .row .one {
+    margin-left: 400px;
+}
+
 .form-control {
+    display: inline;
+    font-family: Playfair;
     padding: 20px;
     font-size: 2rem;
-    margin-left:375px;
+}
+
+.container { 
+    margin-left: 43%;
 }
 
 .btn {
-    margin-left: 480px;
+    display: inline;
+    align-self: auto;
+    margin-left: 100px;
     margin-top: 20px;
     padding: 20px;
-    font-size: 2rem;
-    background-color: rgb(148, 193, 174);
-    border: 2px black solid;
-    color: black;
-    font-weight: 600;
+    font-size: 3rem;
+    background-color: rgb(37, 39, 38);
+    border: 2px white solid;
+    color: rgb(219, 219, 226);
+    font-weight: 400;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: rgba(37, 39, 38, 0.5);
 }
