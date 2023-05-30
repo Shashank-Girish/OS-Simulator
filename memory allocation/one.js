@@ -46,7 +46,7 @@ function firstFit() {
             if (jobSize <= memorySize && !allocatedJobs.includes(i)) {
                 var difference = memorySize - jobSize;
                 sum += difference;
-                geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block ' + j + '</td>' + '<td>' + difference + '</td>' + '<td>Allocated</td>' + '</tr>';
+                geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block ' + (j+1) + '</td>' + '<td>' + difference + '</td>' + '<td>Allocated</td>' + '</tr>';
                 memoryBlocks[j] = difference;
                 allocatedJobs.push(i);
                 allocated = true;
@@ -59,11 +59,11 @@ function firstFit() {
         }
     }
 
-    for (var i = 0; i < jobBlocks.length; i++) {
-        if (!allocatedJobs.includes(i)) {
-            geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block -' + '</td>' + '<td>' + 0 + '</td>' + '<td>Not Allocated</td>' + '</tr>';
-        }
-    }
+    // for (var i = 0; i < jobBlocks.length; i++) {
+    //     if (!allocatedJobs.includes(i)) {
+    //         geTable.innerHTML += '<tr> ' + '<td>' + 'Job ' + (i + 1) + '</td>' + '<td>' + 'Block -' + '</td>' + '<td>' + 0 + '</td>' + '<td>Not Allocated</td>' + '</tr>';
+    //     }
+    // }
 
     geTable.innerHTML += '<tr> ' + '<td></td>' + '<td></td>' + '<td>Total =' + sum + '</td>' + '<td></td>' + '</tr>';
     geTable.lastChild.classList.add('last');
